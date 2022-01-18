@@ -3,7 +3,6 @@ env/
 .vscode/
 a.ipynb
 dd.csv
-pictures/
 src/__pycache__
 src/covid/__pycache__
 src/db_models/__pycache__
