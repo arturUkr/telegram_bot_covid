@@ -1,0 +1,3 @@
+from handler.covid_world import register_handlers_world
+from handler.covid_ukraine import register_handlers_ukraine
+from handler.other import register_handlers_other
