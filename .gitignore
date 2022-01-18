@@ -1,4 +1,13 @@
 env/
+.env
 .vscode/
 a.ipynb
 dd.csv
+src/__pycache__
+src/covid/__pycache__
+src/db_models/__pycache__
+src/db_models/covid/__pycache__
+src/handler/__pycache__
+src/keyboard/__pycache__
+src/schedulers/__pycache__
+src/utils/__pycache__
