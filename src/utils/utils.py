@@ -8,7 +8,7 @@ def get_log_message(message: types.Message) -> str:
     result = f"User {message.from_user.id}, chat {message.chat.id} send message: '{message.text}'"
     return result
 
-
+'''
 def get_environment_variable(name: str) -> str:
     """Get environment variable value from .env file by input <name>
 
@@ -35,3 +35,4 @@ def auth(func):
         return await func(message)
     
     return wrapper
+'''

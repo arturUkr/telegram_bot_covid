@@ -1,8 +1,8 @@
-
 from db_models import WorldStat, ListOperations, ListRegion, Country, ReportDate, DBLogger, UkraineStat, ListDose, ListVaccine, UkraineStatVaccine
 from db_models import add_operations, add_sql_log
-from db_models.database import Session, covid_db_name, create_database, Base
+from db_models.database import Session, create_database, Base
 from utils.exceptions import ErrorBadApiResponse
+from utils.config import Config
 
 from typing import Any, Optional, Union, List
 from loguru import logger
@@ -15,6 +15,7 @@ import json
 import requests
 import time
 import itertools
+
 
 
 class CovidDataFrameLoader:
@@ -334,7 +335,7 @@ class CovidSQLSaver(CovidDataFrameLoader):
                  session: Session,
                  country: Optional[Union[str, List[str]]] = "all", 
                  regions: Optional[Union[str, List[str]]] = "all") -> None:
-        """Class for save cjvid data into sql.
+        """Class for save covid data into sql.
 
         Args:
             session (Session): sqlalchemy session;
@@ -383,9 +384,9 @@ class CovidSQLSaver(CovidDataFrameLoader):
         self.session.commit()
         self.session.close()
 
-    def __create_covid_database(self):
+    def __create_covid_database(self) -> None:
         # if sqlite database is not exists -> create database and empty tables, else -> drop all table and create empty
-        if not os.path.exists(covid_db_name):
+        if not os.path.exists(Config.DATABASE_COVID_NAME):
             create_database()
             add_operations(self.session)
             add_sql_log(self.session, DBLogger(None, 4, datetime.datetime.now()))

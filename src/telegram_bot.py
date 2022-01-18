@@ -1,13 +1,15 @@
 import asyncio
 from aiogram import executor
 from loguru import logger
+from dotenv import load_dotenv
+import os
 import matplotlib
 import matplotlib.pyplot as plt
 
 from schedulers import scheduler
 from create_bot import bot_dispatcher
 from handler import register_handlers_world, register_handlers_ukraine, register_handlers_other
-
+from utils.config import Config
 
 # doesn't show plot on server
 matplotlib.use("Agg")

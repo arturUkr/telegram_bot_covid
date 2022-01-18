@@ -1,13 +1,10 @@
-from aiogram import types, Bot, Dispatcher
-from utils.utils import get_environment_variable
+from aiogram import Bot, Dispatcher
 from covid import CovidSQLGetter, TelegramMessageCovidText, CovidPlotter
 from db_models.database import Session
+from utils.config import Config
 
 
-TELEGRAM_TOKEN = get_environment_variable("TELEGRAM_BOT_TOKEN")
-
-
-bot = Bot(token=TELEGRAM_TOKEN)
+bot = Bot(token=Config.TELEGRAM_BOT_TOKEN)
 bot_dispatcher = Dispatcher(bot=bot)
 
 

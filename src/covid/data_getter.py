@@ -10,6 +10,7 @@ import pandas as pd
 import datetime
 from loguru import logger
 from utils.exceptions import ErrorSQLTableName
+import copy
 
 
 class CovidSQLGetterConfig:
@@ -49,7 +50,7 @@ class CovidSQLGetter(CovidSQLGetterConfig):
         obj = [obj] if not isinstance(obj, list) else obj
         result = []
         for o in obj:
-            obj2dict = o.__dict__   # get attribute from object
+            obj2dict = copy.copy(o.__dict__)   # get attribute from object
             del obj2dict["_sa_instance_state"]   # delete information key
             result.append(obj2dict)
         return pd.DataFrame(result)
@@ -303,10 +304,7 @@ class CovidSQLGetter(CovidSQLGetterConfig):
         
         self.session.close()
         return result
-        
-        
-        
-            
+    
     def get_vaccine_stat(self, 
                          date_from: Optional[str] = None, 
                          date_to: Optional[str] = None, 

@@ -1,13 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from utils.utils import get_environment_variable
+#from utils.utils import get_environment_variable
+from utils.config import Config
 
 
-covid_db_name = get_environment_variable("DATABASE_COVID_NAME")
-
-
-engine = create_engine(f"sqlite:///{covid_db_name}")
+engine = create_engine(f"sqlite:///{Config.DATABASE_COVID_NAME}")
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
