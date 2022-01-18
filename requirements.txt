@@ -1,0 +1,12 @@
+python-dotenv
+aiogram
+loguru
+emoji-country-flag
+SQLAlchemy
+pandas
+requests
+columnar
+aioschedule
+matplotlib
+seaborn
+emoji
