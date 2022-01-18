@@ -1,0 +1,7 @@
+[
+    {"vaccine_id": 1, "vaccine_name": "AstraZeneca",        "vaccine_name_api": "AstraZeneca"},
+    {"vaccine_id": 2, "vaccine_name": "Sinovac (CoronaVac)", "vaccine_name_api": "Sinovac%20(CoronaVac)"},
+    {"vaccine_id": 3, "vaccine_name": "Moderna",            "vaccine_name_api": "Moderna"},
+    {"vaccine_id": 4, "vaccine_name": "Pfizer-BioNTech",    "vaccine_name_api": "Pfizer-BioNTech"},
+    {"vaccine_id": 5, "vaccine_name": "Johnson & Johnson",    "vaccine_name_api": "Johnson%20%26%20Johnson"}
+]

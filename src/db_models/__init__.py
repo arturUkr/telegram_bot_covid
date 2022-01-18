@@ -1,0 +1,11 @@
+from db_models.tbl_logger import DBLogger, add_sql_log
+from db_models.tbl_list_operation import ListOperations, add_operations
+
+from db_models.tbl_ukraine_region import ListRegion
+from db_models.tbl_list_country import Country
+from db_models.tbl_list_report_date import ReportDate
+from db_models.tbl_world_country_covid import WorldStat
+from db_models.tbl_ukraine_region_covid import UkraineStat
+from db_models.tbl_list_vaccines import ListVaccine
+from db_models.tbl_list_dose import ListDose
+from db_models.tbl_ukraine_region_vaccine import UkraineStatVaccine
