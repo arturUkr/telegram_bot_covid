@@ -5,10 +5,11 @@ import aiogram.utils.markdown as md
 from create_bot import bot, message_obj, plotter_obj
 from loguru import logger
 from keyboard import keyboard_inline_world, keyboard_inline_world_variant, keyboard_inline_world_plot_variant
+from utils.utils import refresh_time_checker
 
 
 # Keyboard Button (World) -> Send Inline button (top country table, world dynamic plot)    
-#@bot_dispatcher.message_handler(commands="world")
+@refresh_time_checker
 async def message_command_world(message: types.Message):
     """
         Call Inline Keyboard:
@@ -39,7 +40,7 @@ async def message_command_world(message: types.Message):
     
  
  # Keyboard Button (World) -> Inline button (top country)-> Send Inline Button (deaths | confirmed | existing)
-#@bot_dispatcher.callback_query_handler(text="world_top_country")
+@refresh_time_checker
 async def world_top_country_callback(callback: types.CallbackQuery):
     
     text_ = md.text(md.bold("Виберіть, по якому показнику показати топ країн:"))
@@ -55,7 +56,7 @@ async def world_top_country_callback(callback: types.CallbackQuery):
     
     
 # Keyboard Button (World) -> Inline button (top country)-> Send Inline Button (deaths | confirmed | existing) -> Send top country table
-#@bot_dispatcher.callback_query_handler(Text(startswith="world_top_country_"))    
+@refresh_time_checker
 async def world_top_country_variant_callback(callback: types.CallbackQuery):
     
     config_ = {
@@ -78,7 +79,7 @@ async def world_top_country_variant_callback(callback: types.CallbackQuery):
     
 
 # Keyboard Button (World) -> Inline button (dynamic plot)-> Send Inline Button (deaths | confirmed | existing)
-#@bot_dispatcher.callback_query_handler(text="world_plot_country")
+@refresh_time_checker
 async def world_plot_country_callback(callback: types.CallbackQuery):
    
     user_ = callback.message.chat.id
@@ -94,7 +95,7 @@ async def world_plot_country_callback(callback: types.CallbackQuery):
     
     
 # Keyboard Button (World) -> Inline button (dynamic plot)-> Inline Button (deaths | confirmed | existing) -> Send world dynamic plot (lineplot)
-#@bot_dispatcher.callback_query_handler(Text(startswith="world_plot_country_"))
+@refresh_time_checker
 async def world_plot_country_variant_callback(callback: types.CallbackQuery):
     
     config_ = {

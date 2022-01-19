@@ -17,7 +17,6 @@ import time
 import itertools
 
 
-
 class CovidDataFrameLoader:
 
     COVID_WORLD_BASE_URL = "https://api-covid19.rnbo.gov.ua/charts/main-data?mode=world"
@@ -104,12 +103,12 @@ class CovidDataFrameLoader:
         
         end_date = datetime.date.today()
         count_days = (end_date - CovidDataFrameLoader.START_DATE).days
-        date_sequence = [CovidDataFrameLoader.START_DATE + datetime.timedelta(days=day_) for day_ in range(count_days)]
-
+        date_sequence = [CovidDataFrameLoader.START_DATE + datetime.timedelta(days=day_) for day_ in range(count_days + 1)]
+        
         result = pd.DataFrame({
-            "report_date_id": list(range(1, count_days + 1)),
+            "report_date_id": list(range(1, count_days + 2)),
             "report_date": date_sequence,
-            "is_lockdown_ukraine": [None] * count_days
+            "is_lockdown_ukraine": [None] * (count_days + 1)
         })
         # ! save date data for merge with world statistics
         self._list_date_df = result   

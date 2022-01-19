@@ -2,9 +2,10 @@ from aiogram import types, Dispatcher
 from create_bot import bot, message_obj, plotter_obj
 from loguru import logger
 from keyboard import keyboard_inline_ukraine
+from utils.utils import refresh_time_checker
 
 
-#@bot_dispatcher.message_handler(commands=['Ukraine'])
+@refresh_time_checker
 async def message_command_ukraine(message: types.Message):
     
     user_ = message.chat.id
@@ -18,7 +19,7 @@ async def message_command_ukraine(message: types.Message):
                            parse_mode=types.ParseMode.MARKDOWN)
 
 
-#@bot_dispatcher.callback_query_handler(text="ukraine_global")
+@refresh_time_checker
 async def ukraine_global_ukraine(callback: types.CallbackQuery):
     
     user_ = callback.message.chat.id

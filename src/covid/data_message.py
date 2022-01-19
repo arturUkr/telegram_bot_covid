@@ -72,7 +72,7 @@ class TelegramMessageCovidText:
         result = columnar(data_list, no_borders=True, headers=headers)
         return result
                        
-    def get_message_top_country_for_last_date(self, top_n: int = 10, data_name: str = "confirmed") -> str:
+    def get_message_top_country_for_last_date(self, top_n: int = 20, data_name: str = "confirmed") -> str:
         
         config_ = {
             "confirmed": {"head": "НОВІ ВИПАДКИ", "msg": "нових випадках"},
@@ -159,7 +159,6 @@ class TelegramMessageCovidText:
         
         # last date in database
         _, last_date = self.covid_getter.get_last_date()
-        
         # cumulative data for Ukraine: sum region data
         df_ukraine_stat = self.covid_getter.get_ukraine_stat(is_last_date=True)
         df_ukraine_stat_agg = df_ukraine_stat.loc[:, ["confirmed", "deaths", "recovered", "existing"]].sum()
@@ -171,8 +170,10 @@ class TelegramMessageCovidText:
         
         # ukraine vaccines data by regions
         df_ukraine_stat_vaccines = self.covid_getter.get_vaccine_stat(is_last_date=True)
-        df_ukraine_stat_vaccines_agg = df_ukraine_stat_vaccines.groupby(by=["dose_name"])["count_vaccine_cum"].sum()
-        df_ukraine_stat_vaccines_daily = df_ukraine_stat_vaccines.groupby(by=["dose_name"])["count_vaccine"].sum()
+        df_ukraine_stat_vaccines_agg = df_ukraine_stat_vaccines \
+            .groupby(by=["dose_name"])["count_vaccine_cum"].sum()
+        df_ukraine_stat_vaccines_daily = df_ukraine_stat_vaccines \
+            .groupby(by=["dose_name"])["count_vaccine"].sum()
         
         result = \
             md.text(

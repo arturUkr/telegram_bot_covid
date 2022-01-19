@@ -1,11 +1,8 @@
-
-
 from db_models.database import Session
 from db_models import WorldStat, Country, ReportDate, ListRegion, UkraineStat, UkraineStatVaccine, ListDose, ListVaccine
 from sqlalchemy import func
 from typing import List, Optional, Tuple, Union
 from typing import Any
-import flag
 import pandas as pd
 import datetime
 from loguru import logger
@@ -55,7 +52,9 @@ class CovidSQLGetter(CovidSQLGetterConfig):
             result.append(obj2dict)
         return pd.DataFrame(result)
         
-    def get_all_data_from_tbl(self, tbl_name: str, is_dataframe: bool = True) -> Union[pd.DataFrame, Country]:
+    def get_all_data_from_tbl(self,
+                              tbl_name: str, 
+                              is_dataframe: bool = True) -> Union[pd.DataFrame, Country]:
         """Get all data from SQL table
 
         Args:
@@ -327,6 +326,8 @@ class CovidSQLGetter(CovidSQLGetterConfig):
         # filter by date
         if is_last_date:
            last_date_id, last_date = self.get_last_date()
+           # ! вакцинація на один день запізнюється
+           last_date_id -= 1     
            sql_query = sql_query.filter(ReportDate.report_date_id == last_date_id)
         elif date_from is not None:
             sql_query = sql_query.filter(ReportDate.report_date >= date_from)

@@ -1,30 +1,37 @@
-import os
-from dotenv import load_dotenv
 from aiogram import types
+from typing import Union
+import datetime
+from utils.config import Config
 from loguru import logger
-from aiogram import types
 
-def get_log_message(message: types.Message) -> str:
-    result = f"User {message.from_user.id}, chat {message.chat.id} send message: '{message.text}'"
-    return result
+
+def refresh_time_checker(func):
+    async def wrapper(params: Union[types.Message, types.CallbackQuery]):
+        
+        user_ = params.from_user.id if isinstance(params, types.Message) else params.message.chat.id
+            
+        time_now = datetime.datetime.now()
+        time_refresh_db = datetime.datetime.strptime(Config.DATABASE_COVID_REFRESH_TIME, "%H:%M").time()
+        time_send_mess = datetime.datetime.strptime(Config.SEND_COVID_MESSAGE_TIME, "%H:%M").time()
+        
+        p1 = datetime.datetime(time_now.year, time_now.month, time_now.day, 
+                               time_refresh_db.hour, time_refresh_db.minute, time_refresh_db.second)
+        p2 = datetime.datetime(time_now.year, time_now.month, time_now.day, 
+                               time_send_mess.hour, time_send_mess.minute, time_send_mess.second)  
+        
+        if p1 <= time_now < p2:
+            text_ = "Вибачте, але зараз оновлюється база даних, отримати дані можна буде через декілька хвилин"
+            if isinstance(params, types.Message):
+                await params.answer(text=text_)
+            else:
+                await params.message.answer(text=text_)
+            logger.debug(f"User {user_} send message when database refresh")
+        else:
+            return await func(params)
+
+    return wrapper
 
 '''
-def get_environment_variable(name: str) -> str:
-    """Get environment variable value from .env file by input <name>
-
-    Args:
-        name (str): variable name
-
-    Returns:
-        str: variable values
-    """
-    # set .env file path and load in environments
-    env_path = os.path.join("src/.env")
-    load_dotenv(dotenv_path=env_path)
-    # get value by name
-    return os.environ.get(name)
-
-
 def auth(func):
     async def wrapper(message: types.Message):
         user_id = str(message.from_user.id)

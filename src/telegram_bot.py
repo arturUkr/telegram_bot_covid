@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 from schedulers import scheduler
 from create_bot import bot_dispatcher
 from handler import register_handlers_world, register_handlers_ukraine, register_handlers_other
-from utils.config import Config
+#from utils.config import Config
+from covid import CovidSQLSaver
+from db_models.database import Session
 
 # doesn't show plot on server
 matplotlib.use("Agg")

@@ -1,5 +1,6 @@
 [
     {"dose_id": 1, "dose_name": 1, "dose_name_api": "1"},
     {"dose_id": 2, "dose_name": 2, "dose_name_api": "2"},
-    {"dose_id": 3, "dose_name": 3, "dose_name_api": "A"}
+    {"dose_id": 3, "dose_name": 3, "dose_name_api": "3"},
+    {"dose_id": 4, "dose_name": 4, "dose_name_api": "A"}
 ]
