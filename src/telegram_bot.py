@@ -26,13 +26,16 @@ async def on_startup(_):
 
 if __name__ == "__main__":
     
+    # ! create database, extract/transform/load covid data into database
+    db_creater = CovidSQLSaver(session=Session(), country="all", regions="all")
+    db_creater.refresh_sql_tables()
+    
+    
     # ! add message and callback handlers
     register_handlers_world(dp=bot_dispatcher)
     register_handlers_ukraine(dp=bot_dispatcher)
     register_handlers_other(dp=bot_dispatcher)
     
-    #a = CovidSQLSaver(Session())
-    #a.refresh_sql_tables()       
     
     # ! bot run
     executor.start_polling(dispatcher=bot_dispatcher, 
